@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>The Reveal</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #0a0a0a; color: white; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; margin: 0; }
+        .container { width: 100%; max-width: 400px; text-align: center; }
+        
+        /* Audio Box */
+        .audio-container { background: #1a1a1a; border: 2px dashed #f472b6; border-radius: 20px; padding: 15px; margin-bottom: 25px; }
+        audio { width: 100%; height: 45px; filter: invert(100%) hue-rotate(180deg) brightness(1.5); }
+
+        .summary-card { background: #111; border-radius: 35px; padding: 25px; border: 1px solid #222; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 15px; }
+        .item { background: #1a1a1a; padding: 12px; border-radius: 18px; display: flex; flex-direction: column; align-items: center; border: 1px solid #333; }
+        .item .emoji { font-size: 28px; margin-bottom: 5px; }
+        .item .label { font-size: 8px; text-transform: uppercase; color: #666; font-weight: 800; letter-spacing: 1px; }
+        
+        .btn { margin-top: 30px; background: linear-gradient(to right, #ec4899, #8b5cf6); color: white; padding: 20px 0; width: 100%; border-radius: 100px; text-decoration: none; font-weight: 900; display: inline-block; font-size: 1.1em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="font-weight:900; margin-bottom:20px;">THE PLAN</h1>
+
+        <div class="audio-container">
+            <audio controls preload="auto">
+                <source src="audio/reveal.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <div class="summary-card">
+            <div class="grid" id="grid"></div>
+        </div>
+        <a href="finish_line.html" class="btn">Lock It In ➔</a>
+    </div>
+    <script>
+        const stages = [
+            {id: 'stage1', l: 'Taste'}, {id: 'stage2', l: 'Listen'}, {id: 'stage_flashback', l: 'Memory'},
+            {id: 'stage3', l: 'Smell'}, {id: 'stage4', l: 'Sight'}, {id: 'stage5', l: 'Feel'},
+            {id: 'stage6', l: 'Wear'}, {id: 'stage_gift', l: 'Gift'}, {id: 'stage7', l: 'Exp'}
+        ];
+        const g = document.getElementById('grid');
+        stages.forEach(s => {
+            const c = localStorage.getItem(s.id + '_choice') || '❓';
+            g.innerHTML += `<div class="item"><span class="emoji">${c}</span><span class="label">${s.l}</span></div>`;
+        });
+    </script>
+</body>
+</html>

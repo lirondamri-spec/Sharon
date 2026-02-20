@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Stage 1</title>
+    <style>
+        /* Force visibility */
+        html, body {
+            background-color: #0f172a !important;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: sans-serif;
+            color: white;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            display: block !important;
+            visibility: visible !important;
+        }
+
+        h2 { color: #f472b6; font-size: 2em; margin-bottom: 20px; }
+
+        .audio-box {
+            background: rgba(255,255,255,0.1);
+            border: 1px dashed #f472b6;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 30px;
+        }
+
+        .choices {
+            display: flex;
+            justify-content: space-around;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            flex: 1;
+            background: #1e293b;
+            border: 2px solid #334155;
+            border-radius: 20px;
+            padding: 30px 10px;
+            cursor: pointer;
+        }
+
+        .card.selected {
+            border-color: #f472b6;
+            background: rgba(244, 114, 182, 0.2);
+        }
+
+        .emoji { font-size: 50px; }
+
+        textarea {
+            width: 100%;
+            height: 80px;
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+            display: none;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 18px;
+            border-radius: 50px;
+            border: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-top: 15px;
+            display: none;
+            cursor: pointer;
+        }
+
+        #shareBtn { background: #25d366; color: white; }
+        #nextBtn { background: #db2777; color: white; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>I. Taste</h2>
+        
+        <div class="audio-box">
+            <audio controls style="width: 100%;">
+                <source src="audio/stage1.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <div class="choices">
+            <div class="card" onclick="pick(this, '🍫')">
+                <span class="emoji">🍫</span>
+            </div>
+            <div class="card" onclick="pick(this, '🍪')">
+                <span class="emoji">🍪</span>
+            </div>
+        </div>
+
+        <textarea id="note" placeholder="Any thoughts?"></textarea>
+        
+        <button id="shareBtn" class="btn" onclick="send()">Share Choice 💕</button>
+        <button id="nextBtn" class="btn" onclick="location.href='stage2.html'">Next Stage ➔</button>
+    </div>
+
+    <script>
+        let choice = null;
+
+        function pick(el, em) {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            choice = em;
+            
+            document.getElementById('note').style.display = 'block';
+            document.getElementById('shareBtn').style.display = 'block';
+        }
+
+        function send() {
+            localStorage.setItem('stage1_choice', choice);
+            const msg = "I chose " + choice + " for Taste! 👅";
+            window.open("https://wa.me/972584430097?text=" + encodeURIComponent(msg), '_blank');
+            
+            document.getElementById('shareBtn').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

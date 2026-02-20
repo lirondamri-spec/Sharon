@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Memory</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; min-height: 100vh; display: flex; justify-content: center; align-items: center; background: #0f172a; color: white; margin: 0; }
+        .container { width: 90%; max-width: 400px; text-align: center; }
+        img { width: 100%; border-radius: 20px; border: 4px solid #334155; margin: 20px 0; }
+        .audio-box { background: rgba(255,255,255,0.05); border: 1px dashed #f472b6; border-radius: 20px; padding: 15px; }
+        textarea { width: 100%; height: 100px; background: #1e293b; border: 1px solid #334155; border-radius: 15px; color: white; padding: 15px; margin-bottom: 20px; font-size: 16px; }
+        .btn { width: 100%; padding: 20px; border-radius: 100px; border: none; font-weight: bold; cursor: pointer; }
+        #shareBtn { background: #25d366; color: white; }
+        #nextBtn { background: #db2777; color: white; display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 style="color: #f472b6;">III. Memory</h2>
+        <div class="audio-box"><audio controls style="width:100%"><source src="audio/stage_flashback.mp3" type="audio/mpeg"></audio></div>
+        <img src="memory.jpg">
+        <textarea id="mem" placeholder="What does this moment feel like now?"></textarea>
+        <button id="shareBtn" class="btn" onclick="send()">Share Memory 💕</button>
+        <button id="nextBtn" class="btn" onclick="location.href='stage3.html'">Next Stage ➔</button>
+    </div>
+    <script>
+        function send() {
+            localStorage.setItem('stage_flashback_choice', '💭');
+            const m = encodeURIComponent(`💭 My Flashback Memory: ${document.getElementById('mem').value}`);
+            window.open(`https://wa.me/972584430097?text=${m}`, '_blank');
+            document.getElementById('shareBtn').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

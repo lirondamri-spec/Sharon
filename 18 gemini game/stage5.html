@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>VI. Feel</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; min-height: 100vh; display: flex; justify-content: center; align-items: center; background: #0f172a; margin: 0; color: white; }
+        .container { width: 90%; max-width: 400px; text-align: center; }
+        .audio-box { background: rgba(255,255,255,0.05); border: 1px dashed #f472b6; border-radius: 20px; padding: 20px; margin-bottom: 30px; }
+        audio { width: 100%; height: 40px; }
+        .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .card { background: rgba(255,255,255,0.03); border: 2px solid #334155; border-radius: 25px; padding: 40px 10px; cursor: pointer; transition: 0.3s; }
+        .card.selected { border-color: #f472b6; background: rgba(244, 114, 182, 0.1); transform: scale(1.05); }
+        .emoji { font-size: 60px; font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; }
+        textarea { width: 100%; background: #1e293b; border: 1px solid #334155; border-radius: 15px; color: white; padding: 15px; margin-top: 20px; display: none; font-size: 16px; }
+        .btn { width: 100%; padding: 20px; border-radius: 100px; border: none; font-weight: bold; margin-top: 20px; display: none; font-size: 1.1em; cursor: pointer; }
+        #shareBtn { background: #25d366; color: white; }
+        #nextBtn { background: #db2777; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 style="color: #f472b6; margin-bottom: 20px;">VI. Feel</h2>
+        <div class="audio-box"><audio controls><source src="audio/stage5.mp3" type="audio/mpeg"></audio></div>
+        <div class="choices">
+            <div class="card" onclick="select(this, '✨')"><span class="emoji">✨</span></div>
+            <div class="card" onclick="select(this, '🔥')"><span class="emoji">🔥</span></div>
+        </div>
+        <textarea id="note" placeholder="Any thoughts?"></textarea>
+        <button id="shareBtn" class="btn" onclick="send()">Share Choice 💕</button>
+        <button id="nextBtn" class="btn" onclick="location.href='stage6.html'">Next Stage ➔</button>
+    </div>
+    <script>
+        let selection = null;
+        function select(el, em) {
+            document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected'); selection = em;
+            document.getElementById('note').style.display = 'block';
+            document.getElementById('shareBtn').style.display = 'block';
+        }
+        function send() {
+            localStorage.setItem('stage5_choice', selection);
+            window.open(`https://wa.me/972584430097?text=${encodeURIComponent('I chose ' + selection + ' for Feel!')}`, '_blank');
+            document.getElementById('shareBtn').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>IX. Experience</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; min-height: 100vh; display: flex; justify-content: center; align-items: center; background: #000; color: white; margin: 0; }
+        .container { width: 90%; max-width: 450px; text-align: center; }
+        
+        /* Fixed Audio Box for Stage 7 */
+        .audio-box { background: rgba(255,255,255,0.05); border: 1px dashed #f472b6; border-radius: 20px; padding: 20px; margin-bottom: 25px; }
+        audio { width: 100%; height: 40px; }
+
+        .choices-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 30px 0; }
+        .card { background: #111; border: 2px solid #222; border-radius: 20px; padding: 25px 5px; cursor: pointer; transition: 0.3s; }
+        .card.selected { border-color: #f472b6; background: rgba(244, 114, 182, 0.1); transform: scale(1.05); }
+        .emoji { font-size: 35px; font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; }
+        
+        .btn { width: 100%; padding: 20px; border-radius: 100px; border: none; font-weight: bold; cursor: pointer; display: none; font-size: 1.1em; }
+        #shareBtn { background: #25d366; color: white; }
+        #nextBtn { background: #db2777; color: white; margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 style="color: #f472b6; margin-bottom: 20px;">IX. Experience</h2>
+        
+        <div class="audio-box">
+            <audio controls>
+                <source src="audio/stage7.mp3" type="audio/mpeg">
+                Your browser does not support audio.
+            </audio>
+        </div>
+
+        <div class="choices-grid">
+            <div class="card" onclick="sel(this, '🍆💦')"><span class="emoji">🍆💦</span></div>
+            <div class="card" onclick="sel(this, '🍑')"><span class="emoji">🍑</span></div>
+            <div class="card" onclick="sel(this, '👅💦')"><span class="emoji">👅💦</span></div>
+            <div class="card" onclick="sel(this, '🤫✋')" style="grid-column: 1/2; margin-left: 50%;"><span class="emoji">🤫✋</span></div>
+            <div class="card" onclick="sel(this, '😇')" style="grid-column: 2/3; margin-left: 50%;"><span class="emoji">😇</span></div>
+        </div>
+
+        <button id="shareBtn" class="btn" onclick="send()">Lock Final Choice 💕</button>
+        <button id="nextBtn" class="btn" onclick="location.href='reveal.html'">The Grand Reveal ➔</button>
+    </div>
+
+    <script>
+        let s = null;
+        function sel(e, em) {
+            document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+            e.classList.add('selected'); 
+            s = em;
+            document.getElementById('shareBtn').style.display = 'block';
+        }
+
+        function send() {
+            // Saves to localStorage for the Reveal page
+            localStorage.setItem('stage7_choice', s);
+            
+            const m = encodeURIComponent(`I chose ${s} for the final Experience! 💋`);
+            window.open(`https://wa.me/972584430097?text=${m}`, '_blank');
+            
+            document.getElementById('shareBtn').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

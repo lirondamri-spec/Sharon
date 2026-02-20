@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Your Special Gift</title>
+    <style>
+        body { font-family: 'Georgia', serif; min-height: 100vh; display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); padding: 20px; margin: 0; }
+        .container { background: white; padding: 30px; border-radius: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); max-width: 450px; width: 100%; text-align: center; }
+        .audio-box { background: #fff5f0; padding: 10px; border-radius: 15px; margin-bottom: 20px; border: 1px dashed #ff6e7f; }
+        input { font-size: 55px; text-align: center; width: 120px; border: 3px solid #fcb69f; border-radius: 25px; padding: 15px; margin: 20px 0; outline: none; transition: 0.3s; }
+        input:focus { border-color: #ff6e7f; transform: scale(1.05); }
+        .btn { width: 100%; padding: 18px; border-radius: 50px; border: none; font-weight: bold; cursor: pointer; font-size: 1.1em; }
+        #shareBtn { background: #ff6e7f; color: white; }
+        #nextBtn { background: #764ba2; color: white; display: none; margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 style="color: #ff6e7f;">Your Request 💝</h2>
+        <div class="audio-box">
+             <p style="font-size: 0.8em; color: #ff6e7f; margin-bottom: 5px;">▶️ Hear a message from Liron:</p>
+             <audio controls style="width: 100%; height: 35px;"><source src="audio/stage_gift.mp3" type="audio/mpeg"></audio>
+        </div>
+        <p style="margin-top: 20px; color: #444; line-height: 1.4;">Sharon, this is your wild card. Pick ANY emoji for a special request from me tonight.</p>
+        <input type="text" id="cust" placeholder="🎁">
+        <button id="shareBtn">Send My Request 💕</button>
+        <button id="nextBtn" onclick="location.href='stage7.html'">Final Choice ➔</button>
+    </div>
+    <script>
+        document.getElementById('shareBtn').addEventListener('click', () => {
+            const e = document.getElementById('cust').value || '🎁';
+            const txt = `💝 My Anniversary Request: ${e}\n\nI'll tell you the secret meaning in person... 😘`;
+            window.open(`https://wa.me/972584430097?text=${encodeURIComponent(txt)}`, '_blank');
+            document.getElementById('shareBtn').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
